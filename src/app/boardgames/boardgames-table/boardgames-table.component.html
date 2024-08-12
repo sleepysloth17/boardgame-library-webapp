@@ -1,7 +1,22 @@
 <div>
   <table>
-    <tr *ngFor="let game of games">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>name</th>
+      </tr>
+    </thead>
+    <tr
+      (click)="expand(game)"
+      *ngFor="let game of games | requirementsFilter: filter"
+    >
+      <td>{{ game.id }}</td>
       <td>{{ game.name }}</td>
+      <app-boardgame-detail
+        *ngIf="isExpanded(game)"
+        class="detail"
+        [game]="game"
+      ></app-boardgame-detail>
     </tr>
   </table>
 </div>

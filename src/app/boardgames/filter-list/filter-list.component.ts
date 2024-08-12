@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Predicate } from '@angular/core';
+import { FilterService, FilterType, GameFilter } from '../filter.service';
+import { Game } from '../game';
 import { FilterComponent } from './filter/filter.component';
 
 @Component({
@@ -10,5 +12,26 @@ import { FilterComponent } from './filter/filter.component';
   styleUrl: './filter-list.component.scss',
 })
 export class FilterListComponent {
-  public readonly filters: number[] = [1, 2, 3];
+  public readonly filters: GameFilter[] = [
+    {
+      displayName: 'Player Count',
+      filterType: FilterType.PLAYER_COUNT,
+      predicate: () => true,
+    },
+    {
+      displayName: 'Weight',
+      filterType: FilterType.CHECKLIST,
+      predicate: () => true,
+    },
+  ];
+
+  constructor(private _filterService: FilterService) {}
+
+  public onPredicateChange(
+    currentFilter: GameFilter,
+    newPredicate: Predicate<Game>,
+  ): void {
+    currentFilter.predicate = newPredicate;
+    this._filterService.combineAndSetFilter(this.filters);
+  }
 }

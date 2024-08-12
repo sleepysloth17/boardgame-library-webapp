@@ -8,9 +8,21 @@ div {
     width: 100%;
 
     tr {
-      // td {
+      td,
+      th {
+        border-left: 1px solid red;
+        border-right: 1px solid red;
+        border-bottom: 1px solid red;
+      }
+
       border: 1px solid black;
-      // }
+
+      display: grid;
+      grid-template-columns: 0.2fr 1fr;
+
+      .detail {
+        grid-column: 1/-1;
+      }
     }
   }
 }

@@ -1,1 +1,3 @@
-<p>filter works!</p>
+<ng-container *ngIf="filter">
+  <button (click)="test()">{{ filter.displayName }}</button>
+</ng-container>
