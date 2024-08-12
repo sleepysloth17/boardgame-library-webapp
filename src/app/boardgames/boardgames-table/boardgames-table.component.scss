@@ -1,0 +1,16 @@
+div {
+  max-height: 100%;
+  width: 100%;
+  overflow-y: auto;
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+
+    tr {
+      // td {
+      border: 1px solid black;
+      // }
+    }
+  }
+}
