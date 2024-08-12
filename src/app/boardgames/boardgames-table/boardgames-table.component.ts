@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './boardgames-table.component.html',
-  styleUrl: './boardgames-table.component.scss'
+  styleUrl: './boardgames-table.component.scss',
 })
-export class BoardgamesTableComponent {
-
-}
+export class BoardgamesTableComponent {}
