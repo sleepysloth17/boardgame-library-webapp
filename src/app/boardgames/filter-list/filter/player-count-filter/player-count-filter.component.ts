@@ -42,11 +42,44 @@ export class PlayerCountFilterComponent {
     { label: 'Recommended', value: CountType.RECOMMENDED },
   ];
 
+  private _count: number | null = null;
+  private _countType: CountType = CountType.ANY;
+
   public onCountChange(count: number | null): void {
-    console.log('player count count', count);
+    this._count = count;
+    this._getAndEmitPlayerCountFilter();
   }
 
   public onTypeChange(type: CountType): void {
-    console.log('player count type', type);
+    this._countType = type;
+    this._getAndEmitPlayerCountFilter();
+  }
+
+  private _getAndEmitPlayerCountFilter(): void {
+    this.predicateChange.emit(
+      this._getPlayerCountFilter(this._countType, this._count),
+    );
+  }
+
+  private _getPlayerCountFilter(
+    type: CountType,
+    count: number | null,
+  ): Predicate<Game> {
+    if (count === null || type === CountType.ANY) {
+      return () => true;
+    } else {
+      switch (type) {
+        case CountType.SUPPORTS:
+          return (game: Game) =>
+            game.stats.playerCount.range.min <= count &&
+            game.stats.playerCount.range.max >= count;
+        case CountType.BEST:
+          return (game: Game) =>
+            new Set(game.stats.playerCount.best).has(+count);
+        case CountType.RECOMMENDED:
+          return (game: Game) =>
+            new Set(game.stats.playerCount.suggested).has(+count);
+      }
+    }
   }
 }

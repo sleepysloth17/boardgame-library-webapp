@@ -28,6 +28,12 @@ export class PlaytimeFilterComponent {
   );
 
   public onSelectionChange(time: number | null): void {
-    console.log('playtime', time);
+    if (time === null) {
+      this.predicateChange.emit(() => true);
+    } else {
+      this.predicateChange.emit(
+        (game: Game) => game.stats.playtime.max <= time,
+      );
+    }
   }
 }

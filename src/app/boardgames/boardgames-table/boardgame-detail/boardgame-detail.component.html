@@ -2,11 +2,18 @@
   <img [src]="game.properties.thumbnailUrl" alt="todo alt" width="100" />
   <div>
     <span>{{ game.name }}</span>
+    <span>({{ game.properties.yearPublished }})</span>
     <ul>
-      <li>player count</li>
-      <li>playing time</li>
-      <li>weight</li>
+      <li>
+        player count: {{ game.stats.playerCount.range.min }} -
+        {{ game.stats.playerCount.range.max }}
+      </li>
+      <li>
+        playing time: {{ game.stats.playtime.min }} -
+        {{ game.stats.playtime.max }}
+      </li>
+      <li>weight: {{ game.stats.weight }}</li>
     </ul>
   </div>
-  <div>description, I need to add that to the api</div>
+  <div>{{ game.properties.description }}</div>
 </div>

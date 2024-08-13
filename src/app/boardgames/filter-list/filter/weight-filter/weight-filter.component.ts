@@ -33,6 +33,8 @@ export class WeightFilterComponent {
   ];
 
   public onSelectionChange(weights: Weight[]): void {
-    console.log('weights', weights);
+    this.predicateChange.emit((game: Game) =>
+      new Set(weights).has(game.stats.weight),
+    );
   }
 }

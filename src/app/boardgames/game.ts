@@ -19,6 +19,8 @@ export interface GameStats {
 
 export interface GameProperties {
   type: string;
+  description: string;
+  yearPublished: number;
   imageUrl: string;
   thumbnailUrl: string;
 }
