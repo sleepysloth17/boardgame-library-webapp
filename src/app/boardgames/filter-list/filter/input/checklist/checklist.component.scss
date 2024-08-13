@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    white-space: nowrap;
+
+    label {
+      white-space: nowrap;
+    }
+  }
+}
