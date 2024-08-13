@@ -7,12 +7,10 @@
 
 app-filter-list {
   display: flex;
-  flex: 0 0 8em;
-  padding: 0 1em 0 0;
-  border: 2px solid red;
+  flex: 0 0 10em;
+  padding: 1em 2em 1em 1em;
 }
 
 app-boardgames-table {
   flex: 1;
-  border: 2px solid black;
 }

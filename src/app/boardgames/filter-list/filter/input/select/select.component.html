@@ -1,5 +1,5 @@
 <select [formControl]="form">
-  <option *ngFor="let option of options; index as i" [value]="option.value">
-    {{ option.label }}
+  <option *ngFor="let option of selectOptions" [value]="option.id">
+    {{ option.data.label }}
   </option>
 </select>

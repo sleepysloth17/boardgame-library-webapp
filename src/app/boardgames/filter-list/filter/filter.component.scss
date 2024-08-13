@@ -1,3 +1,9 @@
-span {
-  display: block;
+div {
+  margin-bottom: 1em;
+
+  span {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5em;
+  }
 }
