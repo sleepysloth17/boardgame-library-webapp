@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, startWith } from 'rxjs';
-import { InputOption } from '../model/input-option';
+import { InputOption } from '../input-option';
 
 @Component({
   selector: 'app-select',

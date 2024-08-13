@@ -6,8 +6,9 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { debounceTime, startWith, tap } from 'rxjs';
-import { InputOption } from '../model/input-option';
+import { debounceTime, startWith } from 'rxjs';
+import { UUID } from '../../../../../utils/uuid';
+import { InputOption, UniqueInputOption } from '../input-option';
 
 @Component({
   selector: 'app-radio-list',
@@ -17,32 +18,50 @@ import { InputOption } from '../model/input-option';
   styleUrl: './radio-list.component.scss',
 })
 export class RadioListComponent<T> implements OnInit {
-  @Input() options: InputOption<T>[] = [];
+  @Input() set options(value: InputOption<T>[]) {
+    this.radioListOptions = value.map((option: InputOption<T>) => ({
+      id: UUID.random().value,
+      data: option,
+    }));
+  }
 
   @Output() selected: EventEmitter<T> = new EventEmitter<T>();
 
-  public form: FormGroup<{ radio: FormControl<T> }>;
+  public readonly id: UUID = UUID.random();
 
-  constructor(private _formBuilder: FormBuilder) {
-    this.form = this._formBuilder.group({
-      radio: new FormControl(),
-    });
-  }
+  public form: FormGroup<Record<string, FormControl<T>>> = new FormGroup<
+    Record<string, FormControl<T>>
+  >({});
+
+  public radioListOptions: UniqueInputOption<T>[] = [];
+
+  constructor(private _formBuilder: FormBuilder) {}
 
   public ngOnInit(): void {
     this.form = this._formBuilder.group({
-      radio: new FormControl(),
+      [this.id.value]: new FormControl(
+        this._getInitalValue(),
+      ) as FormControl<T>,
     });
 
     this.form.valueChanges
-      .pipe(tap(console.log))
       .pipe(startWith(this.form.value), debounceTime(1000))
       .subscribe(this._emitSelected.bind(this));
 
     this.form.markAsPending();
   }
 
-  private _emitSelected(state: { radio: T }): void {
-    this.selected.emit(state.radio);
+  private _getInitalValue(): T {
+    for (const option of this.radioListOptions) {
+      if (option.data.default) {
+        return option.data.value;
+      }
+    }
+
+    return this.radioListOptions[0].data.value;
+  }
+
+  private _emitSelected(state: Partial<Record<string, T>>): void {
+    this.selected.emit(state[this.id.value]);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, Predicate } from '@angular/core';
 import { Game } from '../../../game';
-import { InputOption } from '../input/model/input-option';
+import { InputOption } from '../input/input-option';
 import { SelectComponent } from '../input/select/select.component';
 
 @Component({
@@ -28,6 +28,6 @@ export class PlaytimeFilterComponent {
   );
 
   public onSelectionChange(time: number | null): void {
-    console.log(time);
+    console.log('playtime', time);
   }
 }

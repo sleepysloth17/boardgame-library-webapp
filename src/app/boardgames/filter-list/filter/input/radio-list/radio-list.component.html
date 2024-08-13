@@ -1,11 +1,11 @@
 <ul [formGroup]="form">
-  <li *ngFor="let option of options; index as i">
+  <li *ngFor="let option of radioListOptions">
     <input
       type="radio"
-      [id]="i"
-      [value]="option.value"
-      formControlName="radio"
+      [id]="option.id"
+      [value]="option.data.value"
+      [formControlName]="id.value"
     />
-    <label [for]="i">{{ option.label }}</label>
+    <label [for]="option.id">{{ option.data.label }}</label>
   </li>
 </ul>

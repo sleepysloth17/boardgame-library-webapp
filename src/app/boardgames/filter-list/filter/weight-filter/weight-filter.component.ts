@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, Predicate } from '@angular/core';
 import { Game } from '../../../game';
 import { Weight } from '../../../weight';
 import { ChecklistComponent } from '../input/checklist/checklist.component';
-import { InputOption } from '../input/model/input-option';
+import { InputOption } from '../input/input-option';
 
 @Component({
   selector: 'app-weight-filter',
@@ -33,6 +33,6 @@ export class WeightFilterComponent {
   ];
 
   public onSelectionChange(weights: Weight[]): void {
-    console.log('selected', weights);
+    console.log('weights', weights);
   }
 }

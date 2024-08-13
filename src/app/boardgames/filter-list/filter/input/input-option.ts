@@ -3,3 +3,8 @@ export interface InputOption<T> {
   value: T;
   default?: boolean;
 }
+
+export interface UniqueInputOption<T> {
+  id: string;
+  data: InputOption<T>;
+}

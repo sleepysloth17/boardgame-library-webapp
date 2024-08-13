@@ -1,6 +1,6 @@
 <ul [formGroup]="form">
-  <li *ngFor="let option of options; index as i">
-    <input type="checkbox" [id]="i" [formControlName]="i" />
-    <label [for]="i">{{ option.label }}</label>
+  <li *ngFor="let option of checklistOptions">
+    <input type="checkbox" [id]="option.id" [formControlName]="option.id" />
+    <label [for]="option.id">{{ option.data.label }}</label>
   </li>
 </ul>

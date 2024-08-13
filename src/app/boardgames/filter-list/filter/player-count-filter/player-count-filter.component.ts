@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, Predicate } from '@angular/core';
 import { Game } from '../../../game';
-import { InputOption } from '../input/model/input-option';
+import { InputOption } from '../input/input-option';
 import { RadioListComponent } from '../input/radio-list/radio-list.component';
 import { SelectComponent } from '../input/select/select.component';
 
@@ -43,10 +43,10 @@ export class PlayerCountFilterComponent {
   ];
 
   public onCountChange(count: number | null): void {
-    console.log('selected', count);
+    console.log('player count count', count);
   }
 
   public onTypeChange(type: CountType): void {
-    console.log(type);
+    console.log('player count type', type);
   }
 }
