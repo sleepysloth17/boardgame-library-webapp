@@ -1,1 +1,5 @@
-<p>select works!</p>
+<select [formControl]="form">
+  <option *ngFor="let option of options; index as i" [value]="option.value">
+    {{ option.label }}
+  </option>
+</select>

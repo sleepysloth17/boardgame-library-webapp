@@ -1,3 +1,17 @@
-<ng-container *ngIf="filter">
-  <button (click)="test()">{{ filter.displayName }}</button>
-</ng-container>
+<div *ngIf="filter">
+  <span>{{ filter.displayName }}</span>
+  <ng-container [ngSwitch]="filter.filterType">
+    <app-player-count-filter
+      *ngSwitchCase="'PLAYER_COUNT'"
+      (predicateChange)="onPredicateChange($event)"
+    ></app-player-count-filter>
+    <app-playtime-filter
+      *ngSwitchCase="'PLAYTIME'"
+      (predicateChange)="onPredicateChange($event)"
+    ></app-playtime-filter>
+    <app-weight-filter
+      *ngSwitchCase="'WEIGHT'"
+      (predicateChange)="onPredicateChange($event)"
+    ></app-weight-filter>
+  </ng-container>
+</div>

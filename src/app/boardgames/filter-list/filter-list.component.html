@@ -1,8 +1,6 @@
-<div>
-  <ng-container *ngFor="let filter of filters">
-    <app-filter
-      [filter]="filter"
-      (predicateChange)="onPredicateChange(filter, $event)"
-    ></app-filter>
-  </ng-container>
-</div>
+<ng-container *ngFor="let filter of filters">
+  <app-filter
+    [filter]="filter"
+    (predicateChange)="onPredicateChange(filter, $event)"
+  ></app-filter>
+</ng-container>

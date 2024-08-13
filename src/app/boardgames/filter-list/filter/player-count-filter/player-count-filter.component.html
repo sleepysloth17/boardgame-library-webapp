@@ -1,0 +1,9 @@
+<app-select
+  [options]="countOptions"
+  (selected)="onCountChange($event)"
+></app-select>
+
+<app-checklist
+  [options]="checklistOptions"
+  (selected)="onTypeChange($event)"
+></app-checklist>

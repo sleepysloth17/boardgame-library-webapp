@@ -3,10 +3,9 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Game } from './game';
 
 export enum FilterType {
-  PLAYER_COUNT,
-  CHECKLIST,
-  MULTISELECT_CHECKLIST,
-  NUMBER,
+  PLAYER_COUNT = 'PLAYER_COUNT',
+  PLAYTIME = 'PLAYTIME',
+  WEIGHT = 'WEIGHT',
 }
 
 export interface GameFilter {

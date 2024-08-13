@@ -8,25 +8,30 @@ import {
 } from '@angular/core';
 import { GameFilter } from '../../filter.service';
 import { Game } from '../../game';
+import { PlayerCountFilterComponent } from './player-count-filter/player-count-filter.component';
+import { PlaytimeFilterComponent } from './playtime-filter/playtime-filter.component';
+import { WeightFilterComponent } from './weight-filter/weight-filter.component';
 
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    PlayerCountFilterComponent,
+    PlaytimeFilterComponent,
+    WeightFilterComponent,
+  ],
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss',
 })
 export class FilterComponent {
   @Input() filter: GameFilter | null = null;
 
-  public blah = true;
-
   @Output() predicateChange: EventEmitter<Predicate<Game>> = new EventEmitter<
     Predicate<Game>
   >();
 
-  public test(): void {
-    this.blah = !this.blah;
-    this.predicateChange.emit(() => this.blah);
+  public onPredicateChange(predicate: Predicate<Game>): void {
+    this.predicateChange.emit(predicate);
   }
 }

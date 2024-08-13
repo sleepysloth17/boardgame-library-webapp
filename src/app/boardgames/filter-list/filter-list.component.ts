@@ -20,7 +20,12 @@ export class FilterListComponent {
     },
     {
       displayName: 'Weight',
-      filterType: FilterType.CHECKLIST,
+      filterType: FilterType.WEIGHT,
+      predicate: () => true,
+    },
+    {
+      displayName: 'Max Playtime',
+      filterType: FilterType.PLAYTIME,
       predicate: () => true,
     },
   ];
