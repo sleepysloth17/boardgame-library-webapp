@@ -2,11 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, startWith } from 'rxjs';
-
-export interface SelectOption<T> {
-  label: string;
-  value: T;
-}
+import { InputOption } from '../model/input-option';
 
 @Component({
   selector: 'app-select',
@@ -16,9 +12,7 @@ export interface SelectOption<T> {
   styleUrl: './select.component.scss',
 })
 export class SelectComponent<T> implements OnInit {
-  @Input() options: SelectOption<T>[] = [];
-
-  @Input() default: T | null = null;
+  @Input() options: InputOption<T>[] = [];
 
   @Output() selected: EventEmitter<T | null> = new EventEmitter<T | null>();
 
@@ -27,7 +21,9 @@ export class SelectComponent<T> implements OnInit {
   constructor(private _formBuilder: FormBuilder) {}
 
   public ngOnInit(): void {
-    this.form = this._formBuilder.control(this.default);
+    this.form = this._formBuilder.control(
+      this.options.find((val: InputOption<T>) => !!val.default)?.value || null,
+    );
 
     this.form.valueChanges
       .pipe(startWith(this.form.value), debounceTime(1000))

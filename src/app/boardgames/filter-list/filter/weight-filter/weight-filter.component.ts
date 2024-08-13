@@ -1,10 +1,8 @@
 import { Component, EventEmitter, Output, Predicate } from '@angular/core';
 import { Game } from '../../../game';
 import { Weight } from '../../../weight';
-import {
-  ChecklistComponent,
-  ChecklistOption,
-} from '../input/checklist/checklist.component';
+import { ChecklistComponent } from '../input/checklist/checklist.component';
+import { InputOption } from '../input/model/input-option';
 
 @Component({
   selector: 'app-weight-filter',
@@ -18,20 +16,20 @@ export class WeightFilterComponent {
     Predicate<Game>
   >();
 
-  public readonly options: ChecklistOption<Weight>[] = [
-    { label: 'Light', value: Weight.LIGHT, selectedByDefault: true },
+  public readonly options: InputOption<Weight>[] = [
+    { label: 'Light', value: Weight.LIGHT, default: true },
     {
       label: 'Medium light',
       value: Weight.MEDIUM_LIGHT,
-      selectedByDefault: true,
+      default: true,
     },
-    { label: 'Medium', value: Weight.MEDIUM, selectedByDefault: true },
+    { label: 'Medium', value: Weight.MEDIUM, default: true },
     {
       label: 'Medium heavy',
       value: Weight.MEDIUM_HEAVY,
-      selectedByDefault: true,
+      default: true,
     },
-    { label: 'Heavy', value: Weight.HEAVY, selectedByDefault: true },
+    { label: 'Heavy', value: Weight.HEAVY, default: true },
   ];
 
   public onSelectionChange(weights: Weight[]): void {

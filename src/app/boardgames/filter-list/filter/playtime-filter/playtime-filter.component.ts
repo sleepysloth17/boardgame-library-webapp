@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Output, Predicate } from '@angular/core';
 import { Game } from '../../../game';
-import {
-  SelectComponent,
-  SelectOption,
-} from '../input/select/select.component';
+import { InputOption } from '../input/model/input-option';
+import { SelectComponent } from '../input/select/select.component';
 
 @Component({
   selector: 'app-playtime-filter',
@@ -17,15 +15,15 @@ export class PlaytimeFilterComponent {
     Predicate<Game>
   >();
 
-  public readonly options: SelectOption<number | null>[] = [
-    { label: 'Any', value: null } as SelectOption<number | null>,
+  public readonly options: InputOption<number | null>[] = [
+    { label: 'Any', value: null, default: true } as InputOption<number | null>,
   ].concat(
     [10, 15, 20, 25, 30, 45, 60, 75, 90, 120, 150, 180].map(
       (val: number) =>
         ({
           label: String(val),
           value: val,
-        }) as SelectOption<number | null>,
+        }) as InputOption<number | null>,
     ),
   );
 

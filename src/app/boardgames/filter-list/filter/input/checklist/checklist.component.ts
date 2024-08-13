@@ -7,12 +7,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { debounceTime, startWith } from 'rxjs';
-
-export interface ChecklistOption<T> {
-  label: string;
-  value: T;
-  selectedByDefault?: boolean;
-}
+import { InputOption } from '../model/input-option';
 
 @Component({
   selector: 'app-checklist',
@@ -22,11 +17,13 @@ export interface ChecklistOption<T> {
   styleUrl: './checklist.component.scss',
 })
 export class ChecklistComponent<T> implements OnInit {
-  @Input() options: ChecklistOption<T>[] = [];
+  @Input() options: InputOption<T>[] = [];
 
   @Output() selected: EventEmitter<T[]> = new EventEmitter<T[]>();
 
-  public form: FormGroup = new FormGroup({});
+  public form: FormGroup<Record<string, FormControl<boolean>>> = new FormGroup<
+    Record<string, FormControl<boolean>>
+  >({});
 
   constructor(private _formBuilder: FormBuilder) {}
 
@@ -34,12 +31,12 @@ export class ChecklistComponent<T> implements OnInit {
     this.form = this._formBuilder.group(
       this.options.reduce(
         (
-          total: Record<number, FormControl<boolean>>,
-          current: ChecklistOption<T>,
+          total: Record<string, FormControl<boolean>>,
+          current: InputOption<T>,
           i: number,
         ) => {
           total[i] = this._formBuilder.control(
-            !!current.selectedByDefault,
+            !!current.default,
           ) as FormControl<boolean>;
           return total;
         },
@@ -54,11 +51,11 @@ export class ChecklistComponent<T> implements OnInit {
     this.form.markAsPending();
   }
 
-  private _emitSelected(state: Record<number, boolean>): void {
+  private _emitSelected(state: Partial<Record<string, boolean>>): void {
     this.selected.emit(
       this.options
-        .filter((val: ChecklistOption<T>, i: number) => state[i])
-        .map((option: ChecklistOption<T>) => option.value),
+        .filter((val: InputOption<T>, i: number) => state[i])
+        .map((option: InputOption<T>) => option.value),
     );
   }
 }
