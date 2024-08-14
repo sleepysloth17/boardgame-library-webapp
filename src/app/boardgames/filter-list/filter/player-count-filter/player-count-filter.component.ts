@@ -5,7 +5,6 @@ import { RadioListComponent } from '../input/radio-list/radio-list.component';
 import { SelectComponent } from '../input/select/select.component';
 
 enum CountType {
-  ANY = 'ANY',
   SUPPORTS = 'SUPPORTS',
   BEST = 'BEST',
   RECOMMENDED = 'RECOMMENDED',
@@ -36,14 +35,13 @@ export class PlayerCountFilterComponent {
   );
 
   public readonly checklistOptions: InputOption<CountType>[] = [
-    { label: 'Any', value: CountType.ANY, default: true },
-    { label: 'Supports', value: CountType.SUPPORTS },
-    { label: 'Best', value: CountType.BEST },
+    { label: 'Supports', value: CountType.SUPPORTS, default: true },
     { label: 'Recommended', value: CountType.RECOMMENDED },
+    { label: 'Best', value: CountType.BEST },
   ];
 
   private _count: number | null = null;
-  private _countType: CountType = CountType.ANY;
+  private _countType: CountType = CountType.SUPPORTS;
 
   public onCountChange(count: number | null): void {
     this._count = count;
@@ -65,7 +63,7 @@ export class PlayerCountFilterComponent {
     type: CountType,
     count: number | null,
   ): Predicate<Game> {
-    if (count === null || type === CountType.ANY) {
+    if (count === null) {
       return () => true;
     } else {
       switch (type) {
@@ -73,12 +71,12 @@ export class PlayerCountFilterComponent {
           return (game: Game) =>
             game.stats.playerCount.range.min <= count &&
             game.stats.playerCount.range.max >= count;
-        case CountType.BEST:
-          return (game: Game) =>
-            new Set(game.stats.playerCount.best).has(+count);
         case CountType.RECOMMENDED:
           return (game: Game) =>
             new Set(game.stats.playerCount.suggested).has(+count);
+        case CountType.BEST:
+          return (game: Game) =>
+            new Set(game.stats.playerCount.best).has(+count);
       }
     }
   }

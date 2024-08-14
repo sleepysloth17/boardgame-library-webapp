@@ -6,19 +6,43 @@ div {
   table {
     border-collapse: collapse;
     width: 100%;
+    margin-bottom: 2em;
 
     tr {
-      td,
-      th {
-        border-left: 1px solid red;
-        border-right: 1px solid red;
-        border-bottom: 1px solid red;
+      td {
+        display: flex;
+        align-items: flex-end;
+
+        &.name {
+          padding: 0 0 0.2em 0.5em;
+
+          span {
+            &.name {
+              font-weight: bold;
+              margin-right: 1em;
+            }
+
+            &.year {
+              font-weight: bold;
+              font-size: 0.75em;
+            }
+          }
+        }
+
+        &.stats {
+          align-items: center;
+        }
+
+        a {
+          color: black;
+          text-decoration: none;
+        }
       }
 
-      border: 1px solid black;
+      border-bottom: 1px solid darkgray;
 
       display: grid;
-      grid-template-columns: 0.2fr 1fr;
+      grid-template-columns: 1fr 6em 6em 2em;
 
       .detail {
         grid-column: 1/-1;
